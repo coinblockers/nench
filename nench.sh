@@ -151,7 +151,7 @@ then
     printf 'CPU cores:    '
     "$cpu_info" | sed -ne 's/^CPU(s): *//p'
     printf 'Frequency:    '
-    "$cpu_info" | sed -ne 's/^CPU MHz: *//p' -ne 's/^CPU max MHz: *//p'
+    "$cpu_info" | lscpu | sed -ne 's/^CPU max MHz: *//p' -ne 's/^CPU MHz: *//p' | tail -n1
     printf 'RAM:          '
     free -h | awk 'NR==2 {print $2}'
     if [ "$(swapon -s | wc -l)" -lt 2 ]
